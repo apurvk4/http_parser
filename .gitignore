@@ -1,0 +1,8 @@
+*.vcx*
+build
+Debug
+CMakeFiles/
+*.dir/
+CMakeCache.txt
+*.sln
+*.cmake
