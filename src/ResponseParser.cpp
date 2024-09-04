@@ -359,6 +359,7 @@ void ResponseParser::parseHeaderDelimiter(char nextChar,
     readNextChar = true;
   } else if (nextChar == ':') {
     currentParseState = ResponseParseState::HEADER_VALUE;
+    readNextChar = true;
   } else {
     currentParseState = ResponseParseState::PARSE_ERROR;
   }

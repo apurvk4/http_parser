@@ -7,48 +7,48 @@ using http_parser::Version;
 std::string http_parser::method_to_string(Method method) {
   switch (method) {
   case Method::METHOD_GET:
-    return "METHOD_GET";
+    return "GET";
   case Method::METHOD_POST:
-    return "METHOD_POST";
+    return "POST";
   case Method::METHOD_PUT:
-    return "METHOD_PUT";
+    return "PUT";
   case Method::METHOD_DELETE:
-    return "METHOD_DELETE";
+    return "DELETE";
   case Method::METHOD_HEAD:
-    return "METHOD_HEAD";
+    return "HEAD";
   case Method::METHOD_OPTIONS:
-    return "METHOD_OPTIONS";
+    return "OPTIONS";
   case Method::METHOD_PATCH:
-    return "METHOD_PATCH";
+    return "PATCH";
   case Method::METHOD_TRACE:
-    return "METHOD_TRACE";
+    return "TRACE";
   case Method::METHOD_CONNECT:
-    return "METHOD_CONNECT";
+    return "CONNECT";
     break;
   case Method::METHOD_UNKOWN:
     break;
   }
-  return "METHOD_UNKOWN";
+  return "UNKOWN";
 }
 
 Method http_parser::string_to_method(const std::string &s) {
-  if (s == "METHOD_GET") {
+  if (s == "GET") {
     return Method::METHOD_GET;
-  } else if (s == "METHOD_POST") {
+  } else if (s == "POST") {
     return Method::METHOD_POST;
-  } else if (s == "METHOD_PUT") {
+  } else if (s == "PUT") {
     return Method::METHOD_PUT;
-  } else if (s == "METHOD_DELETE") {
+  } else if (s == "DELETE") {
     return Method::METHOD_DELETE;
-  } else if (s == "METHOD_HEAD") {
+  } else if (s == "HEAD") {
     return Method::METHOD_HEAD;
-  } else if (s == "METHOD_OPTIONS") {
+  } else if (s == "OPTIONS") {
     return Method::METHOD_OPTIONS;
-  } else if (s == "METHOD_PATCH") {
+  } else if (s == "PATCH") {
     return Method::METHOD_PATCH;
-  } else if (s == "METHOD_TRACE") {
+  } else if (s == "TRACE") {
     return Method::METHOD_TRACE;
-  } else if (s == "METHOD_CONNECT") {
+  } else if (s == "CONNECT") {
     return Method::METHOD_CONNECT;
   }
   return Method::METHOD_UNKOWN;

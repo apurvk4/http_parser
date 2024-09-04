@@ -14,8 +14,8 @@
  *
  */
 
-#include "Httpdefinitions.hpp"
-#include <API.h>
+#include "HttpDefinitions.hpp"
+#include "API.h"
 #include <string>
 #include <vector>
 
