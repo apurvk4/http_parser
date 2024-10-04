@@ -44,14 +44,14 @@ enum class ResponseParseState {
   PARSE_ERROR,
 };
 
-class PARSER_EXPORT ResponseParser {
+class ResponseParser {
 public:
-  ResponseParser();
-  ~ResponseParser() = default;
+  PARSER_EXPORT ResponseParser();
+  PARSER_EXPORT ~ResponseParser() = default;
 
-  bool parse(int file_descriptor);
-  void reset();
-  Response get_response() const;
+  PARSER_EXPORT bool parse(int file_descriptor);
+  PARSER_EXPORT void reset();
+  PARSER_EXPORT Response get_response() const;
 
 private:
   ResponseParseState currentParseState;

@@ -45,13 +45,14 @@ enum class ParseState {
   PARSE_ERROR,
 };
 
-class PARSER_EXPORT RequestParser {
+class  RequestParser {
 public:
-  RequestParser();
-  ~RequestParser();
-  bool parse(int file_descriptor);
-  void reset();
-  Request get_request();
+  PARSER_EXPORT RequestParser();
+  PARSER_EXPORT ~RequestParser();
+  bool PARSER_EXPORT parse(int file_descriptor);
+  void PARSER_EXPORT reset();
+  Request PARSER_EXPORT get_request();
+  std::string PARSER_EXPORT getErrorMessage();
 
 private:
   ParseState currentParseState;
@@ -61,6 +62,12 @@ private:
   std::string currentVersion;
   std::string currentHeaderKey;
   std::string currentHeaderValue;
+  std::string requestData;
+  std::string errorMessage;
+  int currentCharIndex;
+
+  std::vector<std::string> splitString(const std::string &input,
+                                       const std::string &delimiter);
 
   bool isValidUrlChar(char c);
 

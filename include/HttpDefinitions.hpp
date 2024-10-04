@@ -5,7 +5,7 @@
 #include <vector>
 
 namespace http_parser {
-enum class Method {
+enum class PARSER_EXPORT Method {
   METHOD_GET,
   METHOD_POST,
   METHOD_PUT,
@@ -18,19 +18,19 @@ enum class Method {
   METHOD_UNKOWN
 };
 
-enum class Version {
+enum class PARSER_EXPORT Version {
   HTTP_1_1,
   VERSION_UNKOWN,
 };
 
-struct Header {
+struct PARSER_EXPORT Header {
   std::string key;
   std::string value;
   Header(const std::string &k, const std::string &v) : key(k), value(v) {}
   Header() = default;
 };
 
-struct Request {
+struct PARSER_EXPORT Request {
   Method method;
   std::string url;
   Version version;
@@ -42,7 +42,7 @@ std::string PARSER_EXPORT version_to_string(Version v);
 Method PARSER_EXPORT string_to_method(const std::string &s);
 Version PARSER_EXPORT string_to_version(const std::string &s);
 
-enum class StatusCode {
+enum class PARSER_EXPORT StatusCode {
   OK = 200,
   CREATED = 201,
   ACCEPTED = 202,
@@ -68,7 +68,7 @@ enum class StatusCode {
 std::string PARSER_EXPORT status_code_to_string(StatusCode s);
 StatusCode PARSER_EXPORT string_to_status_code(const std::string &s);
 
-struct Response {
+struct PARSER_EXPORT Response {
   Version version;
   StatusCode status_code;
   std::string status_message;
