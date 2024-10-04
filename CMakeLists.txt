@@ -41,8 +41,8 @@ include_directories(${DIR_LIST})
 # Build http_parser as a dynamic library
 add_library(${PROJECT_NAME} SHARED ${SRC_FILES} ${INCLUDE_FILES} ${LIBS_INCLUDE_FILES})
 
-# Define PARSER_EXPORTS when building the library
-target_compile_definitions(${PROJECT_NAME} PRIVATE PARSER_EXPORTS)
+# Define HTTP_PARSER_EXPORT when building the library
+target_compile_definitions(${PROJECT_NAME} PRIVATE HTTP_PARSER_EXPORT)
 
 # Specify include directories for the target
 target_include_directories(${PROJECT_NAME}
