@@ -221,7 +221,7 @@ void RequestParser::parseVersion(char nextChar, ParseState &currentParseState,
     currentParseState = ParseState::PARSE_ERROR;
     errorMessage = "Invalid Request Http version, It contains invalid space "
                    "character it contains character with ascii value : " +
-                   (int)nextChar;
+                   std::to_string((int)nextChar);
     currentVersion.clear();
   } else if (currentVersion.size() == 0 && nextChar == space) {
     // ignore leading spaces
@@ -232,7 +232,7 @@ void RequestParser::parseVersion(char nextChar, ParseState &currentParseState,
     currentParseState = ParseState::PARSE_ERROR;
     errorMessage = "Invalid Request Http version, It contains invalid character "
                    "character it contains character with ascii value : " +
-                   (int)nextChar;
+                   std::to_string((int)nextChar);
     currentVersion.clear();
   }
 }
@@ -248,7 +248,7 @@ void RequestParser::parseVersionHttpH(char nextChar,
     currentParseState = ParseState::PARSE_ERROR;
     errorMessage = "Invalid Request Http version, it doesnot contain Http "
                    "text, it contains :" +
-                   nextChar + std::string(" , where it should have H");
+                   std::to_string((int)nextChar) + std::string(" , where it should have H");
     currentVersion.clear();
   }
 }
@@ -264,7 +264,7 @@ void RequestParser::parseVersionHttpT1(char nextChar,
     currentParseState = ParseState::PARSE_ERROR;
     errorMessage = "Invalid Request Http version, it doesnot contain Http "
                    "text, it contains :" +
-                   nextChar + std::string(" , where it should have T");
+                   std::to_string((int)nextChar) + std::string(" , where it should have T");
     currentVersion.clear();
   }
 }
@@ -280,7 +280,7 @@ void RequestParser::parseVersionHttpT2(char nextChar,
     currentParseState = ParseState::PARSE_ERROR;
     errorMessage = "Invalid Request Http version, it doesnot contain Http "
                    "text, it contains :" +
-                   nextChar + std::string(" , where it should have T");
+                   std::to_string((int)nextChar) + std::string(" , where it should have T");
     currentVersion.clear();
   }
 }
@@ -296,7 +296,7 @@ void RequestParser::parseVersionHttpP1(char nextChar,
     currentParseState = ParseState::PARSE_ERROR;
     errorMessage = "Invalid Request Http version, it doesnot contain Http "
                    "text, it contains :" +
-                   nextChar + std::string(" , where it should have P");
+                   std::to_string((int)nextChar) + std::string(" , where it should have P");
     currentVersion.clear();
   }
 }
@@ -312,7 +312,7 @@ void RequestParser::parseVersionSlash(char nextChar,
     currentParseState = ParseState::PARSE_ERROR;
     errorMessage = "Missing forward slash for http version "
                    "text, it contains :" +
-                   nextChar + std::string(" , where it should have /");
+                   std::to_string((int)nextChar) + std::string(" , where it should have /");
     currentVersion.clear();
   }
 }
@@ -328,7 +328,7 @@ void RequestParser::parseVersionMajor(char nextChar,
     currentParseState = ParseState::PARSE_ERROR;
     errorMessage = "Missing version number for http version "
                    "text, it contains :" +
-                   nextChar + std::string(" , where it should have had version number");
+                   std::to_string((int)nextChar) + std::string(" , where it should have had version number");
     currentVersion.clear();
   }
 }
@@ -344,7 +344,7 @@ void RequestParser::parseVersionDot(char nextChar,
     currentParseState = ParseState::PARSE_ERROR;
     errorMessage = "Missing version number for http version "
                    "text, it contains :" +
-                   nextChar +
+                   std::to_string((int)nextChar) +
                    std::string(" , where it should have had version number");
     currentVersion.clear();
   }
@@ -373,7 +373,7 @@ void RequestParser::parseVersionMinor(char nextChar,
     currentParseState = ParseState::PARSE_ERROR;
     errorMessage = "Missing minor version number for http version "
                    "text, it contains :" +
-                   nextChar +
+                   std::to_string((int)nextChar) +
                    std::string(" , where it should have had minor version number");
     currentVersion.clear();
   }
@@ -384,7 +384,10 @@ void RequestParser::parseRequestLineEnd(char nextChar,
                                         bool &readNextChar) {
   char cr = 13; // ASCII value for carriage return
   char lf = 10; // ASCII value for line feed
-  if (nextChar == cr) {
+  char space = 32;
+  if(nextChar == space){
+    readNextChar = true;
+  }else if (nextChar == cr) {
     readNextChar = true;
   } else if (nextChar == lf) {
     currentParseState = ParseState::HEADER_KEY;
@@ -430,7 +433,7 @@ void RequestParser::parseHeaderDelimiter(char nextChar,
     currentParseState = ParseState::PARSE_ERROR;
     errorMessage = "Header key doesnot contain delimiter for header value, it "
                    "contains character with ascii value : " +
-                   (int)nextChar;
+                   std::to_string((int)nextChar);
   }
 }
 
@@ -459,7 +462,7 @@ void RequestParser::parseHeaderLineEndCR(char nextChar,
   } else {
     errorMessage = "Header key doesnot contain line ending, it "
                    "contains character with ascii value : " +
-                   (int)nextChar;
+                   std::to_string((int)nextChar);
     currentParseState = ParseState::PARSE_ERROR;
   }
 }
@@ -478,8 +481,8 @@ void RequestParser::parseHeaderLineEndLF(char nextChar,
     currentParseState = ParseState::PARSE_ERROR;
     errorMessage = "Header value : " + currentHeaderValue +
                    " doesnot contain line ending, it "
-                   "contains character with ascii value : ";
-                   (int)nextChar;
+                   "contains character with ascii value : " +
+                   std::to_string((int)nextChar);
     currentHeaderValue.clear();
     currentHeaderKey.clear();
   }
@@ -496,7 +499,7 @@ void RequestParser::parseEndOfHeaderCR(char nextChar,
     errorMessage =
         "Headers doesnot contain carriage return after all the "
         "headers, it contains character with ascii value : " +
-        (int)nextChar + std::string(" where it should have had carriage return");
+        std::to_string((int)nextChar) + std::string(" where it should have had carriage return");
     currentParseState = ParseState::PARSE_ERROR;
   }
 }
@@ -511,7 +514,7 @@ void RequestParser::parseEndOfHeaderLF(char nextChar,
     currentParseState = ParseState::PARSE_ERROR;
     errorMessage = "Headers doesnot contain line ending after all the "
                    "headers, it contains character with ascii value : " +
-                   (int)nextChar +
+                   std::to_string((int)nextChar) +
                    std::string(" where it should have had line ending");
   }
 }
@@ -538,12 +541,12 @@ std::string http_parser::RequestParser::getErrorMessage() {
   std::vector<std::string> request = splitString(requestData, "\r\n");
   if (request.size() > 0) {
     int len = request[request.size() - 1].size();
-    std::string identifier = "";
+    std::string identifier = "\n";
     for (int i = 0; i < len; i++) {
       identifier += " ";
     }
     identifier += "^\n\n";
-    std::string val = "\nError occured at line number : " + request.size() +
+    std::string val = "\nError occured at line number : " + std::to_string(request.size()) +
                       std::string(" and character number : ") +
                       std::to_string(len) + "\n\n";
     return val + requestData + identifier + errorMessage + "\n"; 
